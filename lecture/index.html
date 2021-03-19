@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Page Title</title>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+    <script type="text/babel">      //바벨이 jsx문법을 createHTML문법으로 바꿔준다.
+        const e = React.createElement;
+
+        class LikeButton extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                    liked: false,
+                };
+            }
+
+            render(){
+                // return e(
+                //     'button',       // element
+                //     {onClick: () => {this.setState({liked: true})}, type: 'submit'},        // 이벤트 리스너
+                //     this.state.liked === true ? 'Liked' : 'Like'        // 버튼value
+                // );      
+                // <button onclick="() => {this.setState({liked: true})}" type="submit">Like</button>
+                // 위 코드는 react의 예전 문법으로 프로그래밍 해본 것이다. 
+                // like버튼을 누르면 화면이 새로고침되지 않은 상태에서 liked로 바뀐다. 즉 데이터가 변화할 때 변화를 일으키는 컴포넌트만 다시 다운받아서 웹페이지의 속도를 빠르게 하고 부하는 더 줄여주게 하는 것이 react를 쓰는 이유 중 하나다.
+
+                return <button type="submit" onClick={() => {this.setState({liked:true})}}>
+                    {this.state.liked === true ? 'Liked' : 'like'}
+                    </button>;        //이런식으로 쓰면 더욱 깔끔해보인다.
+                // JSX ( JS + XML )
+            }
+        }
+    </script>
+    <script type="text/babel">
+        ReactDOM.render(<div><LikeButton/><LikeButton/></div>, document.querySelector('#root'));
+    </script>
+    
+</body>
+</html>
+
+<!-- 리액트 구조를 자바스크립트로 나타내자면 이 코드와 같다 -->
