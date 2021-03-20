@@ -16,3 +16,47 @@
 + 앱과 비슷한 사용자경험을 웹에서 구현하기 위해
 
 추가 설명 링크 : https://reactjs.org/
+
+이 수업에 진행한 프로젝트
+---
+
+#### 1. 구구단 프로젝트
+파일경로 : 1.gugudan -> index.html
+
+중요 로직 코드  
+```
+ onSubmit = (e)=>{
+                            e.preventDefault();
+                            if(parseInt(this.state.value) === this.state.first * this.state.second){
+                                this.setState({     
+                                    result: '정답',
+                                    first: Math.ceil(Math.random() * 9),
+                                    second: Math.ceil(Math.random() * 9),
+                                    value: '',
+                                    solution: this.state.value,
+                                });
+                            } else {
+                                this.setState({
+                                    result: '땡',
+                                    value: '',
+                                    solution: '',
+                                });
+                            }
+                    }
+```
+![처음화면](https://user-images.githubusercontent.com/53801395/111873763-5dd1c500-89d5-11eb-8621-01eec7708138.jpg)
+  
+
+프로젝트를 실행할 시 화면에 1~9까지 두 개의 수가 랜덤으로 나오며 입력값에 정답을 입력해야한다
+  
+  
+![맞혔을 시](https://user-images.githubusercontent.com/53801395/111873764-5e6a5b80-89d5-11eb-9fe8-6de7f7677f7f.jpg)
+  
+
+정답을 입력했을 경우 두 개의 수가 다시 랜덤으로 나오며 다음 문제로 넘어간다.
+  
+
+![틀릴 시](https://user-images.githubusercontent.com/53801395/111873765-5f02f200-89d5-11eb-9807-0d200be87937.jpg)
+  
+  
+오답을 입력했을 경우 문제를 틀렸다고 알림이 나오며 정답을 입력할때까지 이 과정이 반복된다.

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Page Title</title>
+</head>
+<body>
+    <div id="root">
+
+    </div>
+    <script type="text/babel">      //바벨이 jsx문법을 createHTML문법으로 바꿔준다.
+        const e = React.createElement;
+
+        class GuGuDan extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {      //state는 이벤트가 일어날때마다 바뀌는 컴포넌트들을 넣으면 된다 
+                    first: Math.ceil(Math.random() * 9),
+                    second: Math.ceil(Math.random() * 9),
+                    value: '',
+                    result: '',
+                    solution: '',
+                };
+            }
+
+            onSubmit = (e)=>{
+                            e.preventDefault();
+                            if(parseInt(this.state.value) === this.state.first * this.state.second){
+                                this.setState({     
+                                    result: '정답',
+                                    first: Math.ceil(Math.random() * 9),
+                                    second: Math.ceil(Math.random() * 9),
+                                    value: '',
+                                    solution: this.state.value,
+                                });
+                            } else {
+                                this.setState({
+                                    result: '땡',
+                                    value: '',
+                                    solution: '',
+                                });
+                            }
+                    }
+            onChange = (e) => {
+                this.setState({value:e.target.value});
+            }
+            render(){
+                return (
+                    <div>
+                        <div>{this.state.first}곱하기{this.state.second}는?</div>
+                        <form onSubmit={this.onSubmit}>
+                            <input type="number" value={this.state.value} onChange={this.onChange}/>
+                            <button>입력!</button>    
+                        </form>
+                        <div>{this.state.solution} {this.state.result}</div>
+                    </div>
+                );//HTML 문서 내에 {} 중괄호를 넣으면 거기에 자바스크립트문법을 사용할 수 있다. form 태그 내에 this는 GuGuDan클래스를 가리킨다.
+            }
+        }
+    </script>
+    <script type="text/babel">
+        ReactDOM.render(<GuGuDan/>, document.querySelector('#root'));
+    </script>
+    
+</body>
+</html>
+
+<!-- 리액트 구조를 자바스크립트로 나타내자면 이 코드와 같다 -->
