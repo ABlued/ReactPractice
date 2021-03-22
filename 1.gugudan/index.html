@@ -63,7 +63,7 @@
             // setState가 호출될 때마다 render함수 또한 호출된다. 그러므로 setState를 많이 호출하거나 로직이 길어지면 속도가 느려질 수 있다.
             // 그래서 render함수에서 함수를 생성하게 되면 setState할 때마다 함수가 계속 생성되어 속도가 느려지게 된다. 그래서 함수는 render내에서가 아닌 클래스 내에서 생성하는 것이 좋다.
             render(){
-                return (//<div> 대신 <React.Fragment>를 이용하자
+                return (//<div> 대신 <React.Fragment>를 이용하자            //JSX에선 HTML태그에 class를 사용하지 못한다 className을 사용해야한다. JS에 class개념과 혼동될수 있기 때문이다.
                     <React.Fragment>
                         <div>{this.state.first}곱하기{this.state.second}는?</div>
                         <form onSubmit={this.onSubmit}>
@@ -83,3 +83,7 @@
     
 </body>
 </html>
+
+<!-- JSX에선 사용 못하는 코드 -> 대체되는 코드
+class -> className
+for -> htmlFor -->
