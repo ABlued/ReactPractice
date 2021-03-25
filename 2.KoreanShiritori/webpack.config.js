@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack  = require('webpack');
+const RefreshWebpackPlugin  = require('@pmmmwh/react-refresh-webpack-plugin');      // 데브 서버 사용할 때
 
 module.exports = {
     mode: 'development',
@@ -22,15 +22,25 @@ module.exports = {
                     // 참조 : https://github.com/browserslist/browserslist#queries
                     debug: true,    
                 }], '@babel/preset-react'],
-                plugins: ['@babel/plugin-proposal-class-properties'],
+                plugins: [
+                    '@babel/plugin-proposal-class-properties', 
+                    'react-refresh/babel',      // 데브 서버 사용할 때 추가
+                ],
             },
         }],
     },
     plugins:[
-        new webpack.LoaderOptionsPlugin({debug: true}),
+        // new webpack.LoaderOptionsPlugin({debug: true}),
+        new RefreshWebpackPlugin,       // 데브 서버 사용할 때 추가
     ],
     output:{
         filename: 'app.js',
         path: path.join(__dirname, 'dist'),
+        publicPath: '/dist/',       // 데브 서버 사용할 때 추가
+    },
+    devServer: {       // 데브 서버 사용할 때 추가
+        publicPath: '/dist/',       // 데브 서버 사용할 때 추가
+        hot: true,       // 데브 서버 사용할 때 추가 
+        // hot reloading : 기존 파일은 output에 저장되고 바뀌어진 파일은 devServer에 저장된다.
     },
 }
