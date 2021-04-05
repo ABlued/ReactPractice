@@ -1,9 +1,9 @@
 const path = require('path');
 const webpack  = require('webpack');
-
+// process.env.NODE_ENV = 'production';     // 실서비스시
 module.exports = {
-    mode: 'development',
-    devtool: 'eval',
+    mode: 'development',        // 실서비스시 : production
+    devtool: 'eval',            // 실서비스시 : hidden-source-map
     entry: {
         app: './client',
     },
