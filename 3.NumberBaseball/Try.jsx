@@ -1,7 +1,8 @@
-const React = require('react');
-const { Component } = React;
+// const React = require('react');
+// const { Component } = React;
+import React from 'react';
 
-class Try extends Component {
+class Try extends React.Component {
 
     render(){
         // console.log(this.props);
@@ -14,4 +15,5 @@ class Try extends Component {
     }
 }
 
-module.exports = Try;
+// module.exports = Try;
+export default Try;

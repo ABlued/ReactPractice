@@ -1,7 +1,9 @@
 // import React, { Component } from 'react';
-const React = require('react');
-const { Component } = React;
-const Try = require('./Try');
+// const React = require('react');
+// const { Component } = React;
+// const Try = require('./Try');
+import React from 'react';
+import Try from './Try';
 function getNumbers(){  //숫자 N개를 중복하지않고 랜덤하게 뽑는 함수
     const candidate = [1,2,3,4,5,6,7,8,9];
     const array = [];
@@ -12,7 +14,7 @@ function getNumbers(){  //숫자 N개를 중복하지않고 랜덤하게 뽑는 
     }
     return array;
 }
-class NumberBaseball extends Component{
+class NumberBaseball extends React.Component{
     state = {
         result: '',
         value: '',
@@ -116,8 +118,8 @@ class NumberBaseball extends Component{
     }
 }
 // export const hello = 'hello';       // import { hello }
-module.exports = NumberBaseball;
-// export default NumberBaseball;      // ES2015 문법 module.exports와 똑같진 않고 호환이 된다 정도로만 생각하자. 가져올때는 import NumberBaseball;
+// module.exports = NumberBaseball;
+export default NumberBaseball;      // ES2015 문법 module.exports와 똑같진 않고 호환이 된다 정도로만 생각하자. 가져올때는 import NumberBaseball;
 
 
 // 노드 문법

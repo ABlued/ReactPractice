@@ -17,7 +17,7 @@ class Test extends Component{
         })
     }
 
-    shouldComponentUpdate(nextProps, nextState, nextContext){
+    shouldComponentUpdate(nextProps, nextState, nextContext){       
         if(this.state.counter !== nextState.counter){
             return true;
         }
@@ -35,5 +35,9 @@ class Test extends Component{
 }
 
 module.exports = Test;
-
+// 여기서 shouldComponentUpdate함수의 nextContext는 설명해보자면 다음과 같다. 
+// 컴포넌트가 A -> B -> C 가 있고 만약 A의 props를 C에게 넘겨주고 싶을 때 B를 거쳐가야한다.
+// 하지만 props를 갖고 사용하지도 않는 컴포넌트에게 전달하는 것은 뜻하지 않은 랜더링이 일어날 수 있기에 좋은 방법이 아니다
+// 그래서 nextcontext 인자를 사용해 직접 보내줄 컴포넌트를 전달하게 되는 것이다.
+// 그리고 이것을 응용한 것이 redux이다.
 // 인프런 강좌 링크 shouldComponentUpdate함수와 pureComponentUpdate: https://www.inflearn.com/course/web-game-react/lecture/21587?tab=curriculum
