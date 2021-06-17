@@ -24,7 +24,7 @@ module.exports = {
                 }], '@babel/preset-react'],
                 plugins: [
                     '@babel/plugin-proposal-class-properties', 
-                    'react-refresh/babel',      // 데브 서버 사용할 때 추가
+                    'react-refresh/babel',      // 데브 서버 사용할 때 추가(핫로딩 빌드도 변환해줌)
                 ],
             },
         }],

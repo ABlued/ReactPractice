@@ -2,7 +2,7 @@
 // const React = require('react');
 // const { Component } = React;
 // const Try = require('./Try');
-import React from 'react';
+import React, {createRef } from 'react';
 import Try from './Try';
 function getNumbers(){  //숫자 N개를 중복하지않고 랜덤하게 뽑는 함수
     const candidate = [1,2,3,4,5,6,7,8,9];
@@ -25,11 +25,18 @@ class NumberBaseball extends React.Component{
     };
     onSubmitForm = (e) => {
         e.preventDefault();
+        this.inputRef.current.focus();
         if(this.state.value === this.state.answer.join('')){        // 다 맞췄을 경우
             this.setState({
                 result:'홈런',
                 tries:[...this.state.tries,{ try: this.state.value, result: '홈런!'}],      // 그래서 push가 아닌 예전 배열을 복사해 새로운 배열에 직접 넣어야한다.
             })
+            alert('게임을 다시 시작합니다.');
+                this.setState({
+                    value: '',
+                    answer: getNumbers(),
+                    tries: [],
+                });
         } else {
             const answerArray = this.state.value.split('').map((v) => parseInt(v));
             console.log(answerArray);
@@ -80,12 +87,14 @@ class NumberBaseball extends React.Component{
         {fruit: '자두', taste: '시다'},
         {fruit: '바나나', taste: '달다'},
     ];
+    inputRef = createRef();     // 이런식으로 createRef를 사용하여 더 쉽게 하는 방법도 있다. 그런데 이 방법은 함수처럼 미세한 조정을 할 수 없다.
     render(){
+        const {result, value, tries} = this.state;  // 이렇게 구조분해로 나눌 수 있다.
         return(
             <>
                 <h1>{this.state.result}</h1>
                 <form onSubmit={this.onSubmitForm}>
-                    <input maxLength={4} value={this.state.value} onChange={this.onChangeInput}/>
+                    <input maxLength={4} ref = {this.inputRef} value={this.state.value} onChange={this.onChangeInput}/>
                 </form>
                 <div>시도 : {this.state.tries.length}</div>
                 <ul>

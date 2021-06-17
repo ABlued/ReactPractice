@@ -1,14 +1,14 @@
 const React = require('react');
-const {Component} = React;
+const {Component, PureComponent} = React; //PureComponent는 shouldComponentUpdate를 구현한 옵션이다.
 
-class Test extends Component{
+class Test extends PureComponent{
     state = {
         counter: 0,
         string: 'hello',
         number: 1,
         boolean: true,
-        object: {},
-        array: [],
+        object: {},     // 하지만 PureComponent 단점은 객체나 배열의 변화를 잘 알아차리지 못한다.
+        array: [],      // ex : array.push()
     };
     onClick = () => {
         // this.setState({});      // react는 이렇게 아무것도 변하지 않더라도 setState가 호출되면 랜더링도 호출된다.
@@ -17,12 +17,12 @@ class Test extends Component{
         })
     }
 
-    shouldComponentUpdate(nextProps, nextState, nextContext){       
-        if(this.state.counter !== nextState.counter){
-            return true;
-        }
-        return false;       // 그래서 이렇게 개발자가 직접 랜더링이 호출되는 조건을 적어주는 것이 좋다.
-    }
+    // shouldComponentUpdate(nextProps, nextState, nextContext){       
+    //     if(this.state.counter !== nextState.counter){
+    //         return true;
+    //     }
+    //     return false;       // 그래서 이렇게 개발자가 직접 랜더링이 호출되는 조건을 적어주는 것이 좋다.
+    // }
 
     render(){
         console.log("렌더링", this.state);
